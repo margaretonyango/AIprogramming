@@ -1,0 +1,36 @@
+#Import the necessary methods from tweepy library
+from tweepy.streaming import StreamListener
+from tweepy import OAuthHandler
+from tweepy import Stream
+
+#Variables that contains the user credentials to access Twitter API 
+access_token = "1515974696-2DyghqnQtW42T1nFGzydmTeJsDsMruLlsWkKCJR"
+access_token_secret = "ubovkkI2jgH97ukkgVi3BweVrGXyhdVmqJbtZCwBPHKhU"
+consumer_key = "WLV4z2bRV6XDPyTS4P7v5hM4O"
+consumer_secret = "FytZ05Jt57o7giAaVMz9SebUP1vGvqswvexuDjY4G4xpNfy0ca"
+
+
+#This is a basic listener that just prints received tweets to stdout.
+class StdOutListener(StreamListener):
+
+    def on_data(self, data):
+        print data
+        return True
+
+    def on_error(self, status):
+        print status
+
+
+if __name__ == '__main__':
+
+    #This handles Twitter authentication and the connection to Twitter Streaming API
+    l = StdOutListener()
+    auth = OAuthHandler(consumer_key, consumer_secret)
+    auth.set_access_token(access_token, access_token_secret)
+    stream = Stream(auth, l)
+
+    #This line filters Twitter Streams to capture data by the keywords: 'python', 'javascript', 'ruby'
+    stream.filter(track=['python', 'javascript', 'ruby'])
+    
+     #This line saves Twitter Streams to a text file called TwitterData once the streams are stopped by a keyboard interrupt
+    TwitterStreaming.py > TwitterData.txt
