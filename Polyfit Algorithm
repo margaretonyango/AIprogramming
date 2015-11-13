@@ -1,0 +1,40 @@
+from numpy import *
+import pylab
+
+# data to fit first 2 polynomial curves
+x = random.rand(8)
+print 'x random generated:'
+print x
+y = random.rand(8)
+print 'y random generated:' 
+print y
+
+# fit the data with a 3rd degree polynomial (1st curve)
+coefficients = polyfit(x, y, 3)
+print '3rd degree coefficients:'
+print coefficients
+
+# fit the data with a 7th degree polynomial (2nd curve)
+coefficients2 = polyfit(x, y, 7)
+print '7th degree coefficients:'
+print coefficients2
+
+# construct the polynomial equations for coefficients and coefficients2 above
+polynomial = poly1d(coefficients)
+print '3rd degree polynomial equation:'
+print polynomial
+
+polynomial2 = poly1d(coefficients2)
+print '7th degree polynomial equation:'
+print polynomial2
+
+# Create a vector of 100 equally spaced points in the interval [-1,1] 
+xx=linspace(0, 1,100)
+print 'Vector Points'
+print xx
+
+pylab.plot(x, y, 'o', xx, polynomial(xx),'-g', xx, polynomial2(xx),'-b')
+#pylab.legend(['key', '3rd degree', '7th degree', ])
+pylab.axis([0,1,0,2])
+
+pylab.show()
